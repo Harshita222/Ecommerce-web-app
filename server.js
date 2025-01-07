@@ -7,12 +7,15 @@ import categoryRoutes from "./routes/CategoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cors from "cors";
 import path from "path";
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from 'url';
+import { createServer } from '@vercel/node';
+
 // configure env
 dotenv.config();
 
 // database config
 connectDB();
+
 // esmodule fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +40,5 @@ app.get("*", function (req, res) {
 // port
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-  console.log(`server is running on mode ${process.env.DEV_MODE} port ${port}`);
-});
+export default createServer(app);
+
